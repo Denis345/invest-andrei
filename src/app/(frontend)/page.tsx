@@ -14,8 +14,6 @@ export default async function HomePage() {
   const payload = await getPayload({config})
   const services = await payload.find({
     collection:"services",
-    draft:false
-
   })
 
 
