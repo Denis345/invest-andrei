@@ -1,5 +1,6 @@
 import { getPayload } from "payload"
 import config from '@/payload.config'
+export const dynamic = 'force-dynamic'
 
 import HeroSection from "@/components/HeroSection"
 import AboutSection from "@/components/AboutSection"
