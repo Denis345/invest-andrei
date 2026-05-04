@@ -21,7 +21,8 @@ export default async function HomePage() {
   const services = await payload.find({
     collection:"services",
   })
-
+  console.log("Storyblok token exists:", Boolean(process.env.STORYBLOK_ACCESS_TOKEN))
+  console.log("Storyblok token length:", process.env.STORYBLOK_ACCESS_TOKEN?.length)
   getStoryblok()
   const storyblokApi = getStoryblokApi()
 
