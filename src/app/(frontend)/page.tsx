@@ -8,6 +8,12 @@ import {getStoryblok} from "@/lib/storyblok"
 import { getStoryblokApi } from "@storyblok/react/rsc"
 import { StoryblokServerComponent } from "@storyblok/react/rsc"
 
+type StoryblokT  = {
+    _uid:string,
+    component:string,
+    [key: string]: unknown
+}
+
 
 
 export default async function HomePage() {
@@ -26,6 +32,7 @@ export default async function HomePage() {
 
 
    const body = data.story.content.body
+   console.log('====== ',body,'====== ')
     
 
   return (
@@ -34,7 +41,7 @@ export default async function HomePage() {
   <div className="pointer-events-none absolute right-0 top-40 h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-3xl" />
 
   <div className="relative">
-      {body.map((el)=>{
+      {body.map((el:StoryblokT)=>{
         if(el.component==="faq"){
           return(
              <>
