@@ -116,7 +116,7 @@ export default function QuizForm({questions}:any){
                 )}
             <button
   type="submit"
-  className="w-full rounded-xl bg-blue-500 px-6 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:bg-blue-400"
+  className="w-full rounded-xl bg-blue-500 px-6 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:bg-blue-400 active:scale-95 active:bg-blue-600"
 >
   Отправить заявку
 </button>

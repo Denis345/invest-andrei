@@ -1,12 +1,12 @@
 import { getPayload } from "payload"
 import config from '@/payload.config'
 export const dynamic = 'force-dynamic'
-
-import HeroSection from "@/components/HeroSection"
-import AboutSection from "@/components/AboutSection"
 import ServicesSection from "@/components/ServicesSection"
 
 import './styles.css'
+import {getStoryblok} from "@/lib/storyblok"
+import { getStoryblokApi } from "@storyblok/react/rsc"
+import { StoryblokServerComponent } from "@storyblok/react/rsc"
 
 
 
@@ -16,6 +16,17 @@ export default async function HomePage() {
     collection:"services",
   })
 
+  getStoryblok()
+  const storyblokApi = getStoryblokApi()
+
+
+  const {data} = await storyblokApi.get("cdn/stories/home", {
+    version:"draft"
+  })
+
+
+   const body = data.story.content.body
+    
 
   return (
 <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
@@ -23,10 +34,20 @@ export default async function HomePage() {
   <div className="pointer-events-none absolute right-0 top-40 h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-3xl" />
 
   <div className="relative">
-    <HeroSection />
-    <AboutSection />
-    <ServicesSection services={services.docs} />
+      {body.map((el)=>{
+        if(el.component==="faq"){
+          return(
+             <>
+              <ServicesSection services={services.docs} />
+              <StoryblokServerComponent key={el._uid} blok={el} />
+            </>
+          )
+        }
+        return <StoryblokServerComponent key={el._uid} blok={el} />
+        })}
+   
   </div>
+
 </main>
 )
 }
